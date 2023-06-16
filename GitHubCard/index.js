@@ -6,12 +6,27 @@ import axios from "axios";
     https://api.github.com/users/<your name>
 */
 
-axios
-  .get(`https://api.github.com/users/crharding`)
-  .then((resp) => {
-    document.querySelector(".cards").appendChild(githubCard(resp.data));
-  })
-  .catch((err) => console.error(err));
+const followersArray = [
+  "codingbyron",
+  "tetondan",
+  "dustinmyers",
+  "justsml",
+  "luishrd",
+  "bigknell",
+];
+
+for (let i = 0; i < followersArray.length; i++) {
+  getGitCard(followersArray[i]);
+}
+
+function getGitCard(username) {
+  axios
+    .get(`https://api.github.com/users/${username}`)
+    .then((resp) => {
+      document.querySelector(".cards").appendChild(githubCard(resp.data));
+    })
+    .catch((err) => console.error(err));
+}
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -37,9 +52,7 @@ axios
     user, and adding that card to the DOM.
 */
 
-const followersArray = [tetondan, dustinmyers, justsml, luishrd, bigknell];
-
-function githubCard(gitinfo) {
+function githubCard(gitInfo) {
   const card = document.createElement("div");
   const img = document.createElement("img");
   const cardInfo = document.createElement("div");
@@ -52,20 +65,10 @@ function githubCard(gitinfo) {
   const following = document.createElement("p");
   const bio = document.createElement("p");
 
-  //   <div class="card">
-  //   <img src={image url of user} />
-  //   <div class="card-info">
-  //     <h3 class="name">{users name}</h3>
-  //     <p class="username">{users user name}</p>
-  //     <p>Location: {users location}</p>
-  //     <p>Profile:
-  //       <a href={address to users github page}>{address to users github page}</a>
-  //     </p>
-  //     <p>Followers: {users followers count}</p>
-  //     <p>Following: {users following count}</p>
-  //     <p>Bio: {users bio}</p>
-  //   </div>
-  // </div>
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  login.classList.add("username");
 
   img.src = gitInfo.avatar_url;
   img.alt = "github user";
@@ -96,7 +99,20 @@ function githubCard(gitinfo) {
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
 
-
+  //   <div class="card">
+  //   <img src={image url of user} />
+  //   <div class="card-info">
+  //     <h3 class="name">{users name}</h3>
+  //     <p class="username">{users user name}</p>
+  //     <p>Location: {users location}</p>
+  //     <p>Profile:
+  //       <a href={address to users github page}>{address to users github page}</a>
+  //     </p>
+  //     <p>Followers: {users followers count}</p>
+  //     <p>Following: {users following count}</p>
+  //     <p>Bio: {users bio}</p>
+  //   </div>
+  // </div>
 */
 
 /*
